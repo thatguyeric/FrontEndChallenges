@@ -40,7 +40,8 @@ $(document).ready(function () {
         //display question
         $("#challengeQuestion").text(JSquestions[0]);
         editorJS.setReadOnly(false);
-
+        editorHTML.setReadOnly(true);
+        editorCSS.setReadOnly(true);
     });
 
     $("#HTMLC1").click(function () {
@@ -52,6 +53,8 @@ $(document).ready(function () {
         //display question
         $("#challengeQuestion").text(HTMLquestions[0]);
         editorHTML.setReadOnly(false);
+        editorCSS.setReadOnly(true);
+        editorJS.setReadOnly(true);
 
     });
 
@@ -64,6 +67,8 @@ $(document).ready(function () {
         //display question
         $("#challengeQuestion").text(CSSquestions[0]);
         editorCSS.setReadOnly(false);
+        editorHTML.setReadOnly(true);
+        editorJS.setReadOnly(true);
 
     });
 
