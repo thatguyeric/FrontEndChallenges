@@ -1,3 +1,5 @@
+var answer;
+var question;
 
 // hide alerts before DOM loads
 $('#correctAlert').hide();
@@ -22,53 +24,18 @@ $(document).ready(function () {
         }, 500, 'linear');
     });
 
-    $("#HTMLTab").click(function () {
+    $("#JSC1").click(function () {
 
         // hide alerts
         $('#incorrectAlert').hide();
         $('#correctAlert').hide();
 
-        // set editor mode and clear contents
-        editor.setValue("");
-
         // get question and display it
-        $.get('js-challenge.txt', function (question) {
-            $("#challengeQuestion").text('html question');
+        $.get('js-challenge.txt', function (q) {
+            $("#challengeQuestion").text(q);
         }, 'text');
+
     });
-
-
-    $("#CSSTab").click(function () {
-
-        // hide alerts
-        $('#incorrectAlert').hide();
-        $('#correctAlert').hide();
-
-        // set editor mode and clear contents
-        editor.setValue("");
-
-        // get question and display it
-        $.get('js-challenge.txt', function (question) {
-            $("#challengeQuestion").text('css question');
-        }, 'text');
-    });
-
-
-    $("#JSTab").click(function () {
-
-        // hide alerts
-        $('#incorrectAlert').hide();
-        $('#correctAlert').hide();
-
-        // set editor mode and clear contents
-        editor.setValue("");
-
-        // get question and display it
-        $.get('js-challenge.txt', function (question) {
-            $("#challengeQuestion").text(question);
-        }, 'text');
-    });
-
 
     $("#checkAnswer").click(function () {
 
@@ -87,8 +54,7 @@ $(document).ready(function () {
                 // read the entire file into a variable 
                 // use another variable to get the text up to the *
                 // when next is pressed, the next challenge is pulled 
-                // im not sure, this is tricky...
-                // or we can just create a drop down menu on each of the tabs
+                // OR we can just create a drop down menu on each of the tabs
                 // and each question could load in from its own file ?
 
             } else {
