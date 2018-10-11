@@ -184,5 +184,4 @@ function getChallenges() {
     $.get('challenges/JSchallenge1-question.txt', function (a) {
         challengeQuestions.push(a);
     });
-
 }
