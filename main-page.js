@@ -7,32 +7,87 @@ var HTMLanswers = [];
 var CSSquestions = [];
 var CSSanswers = [];
 
+getChallenges();
+
 // hide alerts before DOM loads
 $('#correctAlert').hide();
 $('#incorrectAlert').hide();
 
+// sets up editor and enables preview
+var editorHTML = ace.edit("editorHTML");
+editorHTML.session.setMode("ace/mode/html");
+var editorCSS = ace.edit("editorCSS");
+editorCSS.session.setMode("ace/mode/css");
+var editorJS = ace.edit("editorJS");
+editorJS.session.setMode("ace/mode/javascript");
+editorHTML.setReadOnly(true);
+editorCSS.setReadOnly(true);
+editorJS.setReadOnly(true);
+
 // Once DOM loads
 $(document).ready(function () {
 
-    /*******************
-     *     buttons
-     * *****************/
+    /*********************************************************************************
+     *                                      tabs
+     * *********************************************************************************/
+
+    $("#JSC1").click(function () {
+
+        // hide alerts
+        $('#incorrectAlert').hide();
+        $('#correctAlert').hide();
+
+        //display question
+        $("#challengeQuestion").text(JSquestions[0]);
+        editorJS.setReadOnly(false);
+
+    });
+
+    $("#HTMLC1").click(function () {
+
+        // hide alerts
+        $('#incorrectAlert').hide();
+        $('#correctAlert').hide();
+
+        //display question
+        $("#challengeQuestion").text(HTMLquestions[0]);
+        editorHTML.setReadOnly(false);
+
+    });
+
+    $("#CSSC1").click(function () {
+
+        // hide alerts
+        $('#incorrectAlert').hide();
+        $('#correctAlert').hide();
+
+        //display question
+        $("#challengeQuestion").text(CSSquestions[0]);
+        editorCSS.setReadOnly(false);
+
+    });
+
+    /*********************************************************************************
+     *                                   buttons
+     * *********************************************************************************/
 
     $("#checkAnswer").click(function () {
 
-        // compare user answer to txt file answer
-        /*if (editor.getValue() == JSanswers[0]) {
+        var preview = document.getElementById('preview').contentWindow.document;
+        preview.open();
+        preview.write(
+            "<style>" +
+            editorCSS.getValue() +
+            "</style>" +
+            "<body>" +
+            editorHTML.getValue() +
+            "</body>" +
+            "<script>" +
+            editorJS.getValue() +
+            "</script>"
+        );
+        preview.close();
 
-            // show correct alert and hide incorrect alert
-            $('#correctAlert').fadeIn();
-            $('#incorrectAlert').hide();
-
-        } else {
-
-            // show incorrect alert and hide correct alert
-            $('#incorrectAlert').fadeIn();
-            $('#correctAlert').hide();
-        } */
     });
 
     $("#clearAnswer").click(function () {
@@ -45,39 +100,10 @@ $(document).ready(function () {
         $('#incorrectAlert').fadeOut();
     });
 
-    /*******************
-     *     tabs
-     * *****************/
-    
-    $("#JSC1").click(function () {
+});
 
-        // hide alerts
-        $('#incorrectAlert').hide();
-        $('#correctAlert').hide();
-
-        //display question
-        $("#challengeQuestion").text(JSquestions[0]);
-
-    });
-
-
-    // sets up editor and enables preview
-    var editor = ace.edit("editor");
-    editor.session.setMode("ace/mode/html");
-    editor.getSession().on('change', function () {
-        $('#preview').contents().find('body').html(editor.getSession().getValue());
-    });
-
-    // enables smooth scrolling to elements
-    $('a[href*="#"]').on('click', function (e) {
-        e.preventDefault();
-
-        $('html, body').animate({
-            scrollTop: $($(this).attr('href')).offset().top
-        }, 500, 'linear');
-    });
-
-    // pulls all questions and answers into lists
+// pulls all questions and answers into lists
+function getChallenges() {
     for (var i = 1; i < 4; i++) {
         var aFile = 'challenges/js-answers' + i + '.txt';
         $.get(aFile, function (a) {
@@ -103,16 +129,14 @@ $(document).ready(function () {
         $.get(aFile, function (a) {
             HTMLanswers.push(a);
         });
-        
+
         cFile = 'challenges/html-challenge' + i + '.txt';
         $.get(cFile, function (q) {
             HTMLquestions.push(q);
         });
     }
-
     console.log('answers, questions');
     console.log(JSanswers, JSquestions);
     console.log(HTMLanswers, HTMLquestions);
     console.log(CSSanswers, CSSquestions);
-
-});
+}

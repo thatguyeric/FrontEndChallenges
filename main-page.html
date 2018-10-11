@@ -41,9 +41,7 @@
                         HTML
                     </a>
                     <div class="dropdown-menu" aria-labelledby="HTMLTab">
-                        <a class="dropdown-item" id="HTMLC1" href="#challengeQuestion">HTML Challenge 1</a>
-                        <a class="dropdown-item" id="HTMLC2" href="#challengeQuestion">HTML Challenge 2</a>
-                        <a class="dropdown-item" id="HTMLC3" href="#challengeQuestion">HTML Challenge 3</a>
+                        <a class="dropdown-item" id="HTMLC1" href="#currentChallenge">HTML Challenge 1</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -52,9 +50,7 @@
                         CSS
                     </a>
                     <div class="dropdown-menu" aria-labelledby="CSSTab">
-                        <a class="dropdown-item" id="CSSC1" href="#challengeQuestion">CSS Challenge 1</a>
-                        <a class="dropdown-item" id="CSSC2" href="#challengeQuestion">CSS Challenge 2</a>
-                        <a class="dropdown-item" id="CSSC3" href="#challengeQuestion">CSS Challenge 3</a>
+                        <a class="dropdown-item" id="CSSC1" href="#currentChallenge">CSS Challenge 1</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -63,9 +59,7 @@
                         JavaScript
                     </a>
                     <div class="dropdown-menu" aria-labelledby="JSTab">
-                        <a class="dropdown-item" id="JSC1" href="#challengeQuestion">JavaScript Challenge 1</a>
-                        <a class="dropdown-item" id="JSC2" href="#challengeQuestion">JavaScript Challenge 2</a>
-                        <a class="dropdown-item" id="JSC3" href="#challengeQuestion">JavaScript Challenge 3</a>
+                        <a class="dropdown-item" id="JSC1" href="#currentChallenge">JavaScript Challenge 1</a>
                     </div>
                 </li>
             </ul>
@@ -75,10 +69,10 @@
     <!-- image at top of page -->
     <img src="./code.jpeg" width="100%">
 
-    <div id="currentChallenge" style="margin-right:7%; margin-left:7%; margin-top:3%">
+    <div id="currentChallenge" style="margin-top:3%">
 
         <!-- challenge title/question.. whatever u want to call it -->
-        <div style="margin-top:15px; margin-bottom:20px; margin-left:10px;">
+        <div style="display:flex; justify-content:center; margin-top:15px; margin-bottom:30px; margin-left:10px;">
             <h5 id="challengeQuestion"></h5>
         </div>
 
@@ -93,13 +87,32 @@
         </div>
 
         <!-- user input and buttons -->
-        <div style="width:100%;">
-            <div id="editor" placeholder="enter code here.." style="height:400px; width:45%; border:1px solid gray; float:left"></div>
-            <iframe class="preview" id="preview" style="float:right; width:45%; height:400px; border: 1px solid gray">
-            </iframe>
-            <div style="margin-top:8px; width:45%;">
-                <button type="button" id="checkAnswer" style="margin:8px" class="btn btn-info">Check</button>
-                <button type="button" id="clearAnswer" style="float:right; margin:8px" class="btn btn-danger">Clear</button>
+        <div style="width:100%; ">
+
+            <!-- editors -->
+            <div style="display:flex; justify-content:center;">
+                <div style="width:25%">
+                    <h6>HTML</h6>
+                    <div id="editorHTML" style="height:200px; width:95%;  border:1px solid gray;"></div>
+                </div>
+                <div style="width:25%">
+                    <h6>CSS</h6>
+                    <div id="editorCSS" style="height:200px; width:95%; border:1px solid gray;"></div>
+                </div>
+                <div style="width:25%">
+                    <h6>JavaScript</h6>
+                    <div id="editorJS" style="height:200px; width:95%;  border:1px solid gray;"></div>
+                </div>
+            </div>
+
+            <!-- buttons -->
+            <div style="display:flex; justify-content:center;">
+                <div style="margin-top:10px; width:45%;">
+                    <button type="button" id="checkAnswer" style="margin:8px" class="btn btn-info">Check</button>
+                    <button type="button" id="clearAnswer" style="float:right; margin:8px" class="btn btn-danger">Clear</button>
+                    <iframe class="preview" id="preview" style="width:100%; margin-top:10px; display:flex; justify-content:center; height:400px; border: 1px solid gray">
+                    </iframe>
+                </div>
             </div>
         </div>
     </div>
