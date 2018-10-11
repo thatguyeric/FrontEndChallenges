@@ -9,3 +9,7 @@
 .jumbotron {
     background: linear-gradient(#d7f1f5, #c8d6e7, #4ec4d6);
 }
+
+.nav-item {
+    margin-right: 5px;
+}

@@ -26,22 +26,45 @@
 
 <body>
     <!-- nav bar at the top of the screen -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background: linear-gradient(#007bff, #175aa1);">
-        <a class="navbar-brand" href="#">
-            <img src="https://manu.ninja/logo.svg" width="30" height="30" class="d-inline-block align-top">
-            Code Challenges
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="#currentChallenge" id="HTMLTab">HTML</a>
-                    <a class="nav-item nav-link" href="#currentChallenge" id="CSSTab">CSS</a>
-                    <a class="nav-item nav-link" href="#currentChallenge" id="JSTab">JavaScript</a>
-                </div>
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color:white;">
+        <img src="./html-css-javascript.png" height="45" class="d-inline-block align-top" style="margin-right:20px;">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="HTMLTab" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        HTML
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="HTMLTab">
+                        <a class="dropdown-item" id="HTMLC1" href="#">HTML Challenge 1</a>
+                        <a class="dropdown-item" id="HTMLC2" href="#">HTML Challenge 2</a>
+                        <a class="dropdown-item" id="HTMLC3" href="#">HTML Challenge 3</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="CSSTab" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        CSS
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="CSSTab">
+                        <a class="dropdown-item" id="CSSC1" href="#">CSS Challenge 1</a>
+                        <a class="dropdown-item" id="CSSC2"href="#">CSS Challenge 2</a>
+                        <a class="dropdown-item" id="CSSC3"href="#">CSS Challenge 3</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="JSTab" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        JavaScript
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="JSTab">
+                        <a class="dropdown-item" id="JSC1" href="#">JavaScript Challenge 1</a>
+                        <a class="dropdown-item" id="JSC2" href="#">JavaScript Challenge 2</a>
+                        <a class="dropdown-item" id="JSC3" href="#">JavaScript Challenge 3</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <!-- image at top of page -->
@@ -71,7 +94,6 @@
             </iframe>
             <div style="margin-top:8px; width:45%;">
                 <button type="button" id="checkAnswer" style="margin:8px" class="btn btn-info">Check</button>
-                <button type="button" id="nextChallenge" style="float:right; margin:8px" class="btn btn-primary">Next</button>
                 <button type="button" id="clearAnswer" style="float:right; margin:8px" class="btn btn-danger">Clear</button>
             </div>
         </div>

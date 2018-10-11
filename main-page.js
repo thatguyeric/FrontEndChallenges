@@ -111,21 +111,4 @@ $(document).ready(function () {
         $('#incorrectAlert').fadeOut();
     });
 
-    $("#nextChallenge").click(function () {
-
-        // deletes content in the editor
-        editor.setValue("");
-
-        // hide alerts
-        $('#correctAlert').hide();
-        $('#incorrectAlert').hide();
-
-        /* 
-            - get the next challenge from text file and display to #challengeQuestion
-            - this is tricky
-        */
-
-    });
-
-
 });
