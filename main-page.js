@@ -1,11 +1,13 @@
 var answer;
 var question;
-var JSquestions = [];
-var JSanswers = [];
-var HTMLquestions = [];
-var HTMLanswers = [];
-var CSSquestions = [];
-var CSSanswers = [];
+
+// the first one in each is for HTML challenge 1
+// the second one in each is for CSS challenge 1
+// the third one in each is for JS challenge 1
+var JSchallenges = [];
+var CSSchallenges = [];
+var HTMLchallenges = [];
+var challengeQuestions = [];
 
 getChallenges();
 
@@ -31,30 +33,26 @@ $(document).ready(function () {
      *                                      tabs
      * *********************************************************************************/
 
-    $("#JSC1").click(function () {
-
-        // hide alerts
-        $('#incorrectAlert').hide();
-        $('#correctAlert').hide();
-
-        //display question
-        $("#challengeQuestion").text(JSquestions[0]);
-        editorJS.setReadOnly(false);
-        editorHTML.setReadOnly(true);
-        editorCSS.setReadOnly(true);
-    });
-
     $("#HTMLC1").click(function () {
 
         // hide alerts
         $('#incorrectAlert').hide();
         $('#correctAlert').hide();
 
-        //display question
-        $("#challengeQuestion").text(HTMLquestions[0]);
+        //display question and set read only for appropriate editors
+        $("#challengeQuestion").text(challengeQuestions[0]);
         editorHTML.setReadOnly(false);
         editorCSS.setReadOnly(true);
         editorJS.setReadOnly(true);
+
+        // clear text in editors
+        editorHTML.setValue("");
+        editorCSS.setValue("");
+        editorJS.setValue("");
+
+        // display the html and css for this challenge
+        editorJS.setValue(JSchallenges[0]);
+        editorCSS.setValue(CSSchallenges[0]);
 
     });
 
@@ -64,12 +62,43 @@ $(document).ready(function () {
         $('#incorrectAlert').hide();
         $('#correctAlert').hide();
 
-        //display question
-        $("#challengeQuestion").text(CSSquestions[0]);
+        //display question and set read only for appropriate editors
+        $("#challengeQuestion").text(challengeQuestions[1]);
         editorCSS.setReadOnly(false);
         editorHTML.setReadOnly(true);
         editorJS.setReadOnly(true);
 
+        // clear text in editors
+        editorHTML.setValue("");
+        editorCSS.setValue("");
+        editorJS.setValue("");
+
+        // display the html and css for this challenge
+        editorJS.setValue(JSchallenges[1]);
+        editorHTML.setValue(HTMLchallenges[1]);
+
+    });
+
+    $("#JSC1").click(function () {
+
+        // hide alerts
+        $('#incorrectAlert').hide();
+        $('#correctAlert').hide();
+
+        //display question and set read only for appropriate editors
+        $("#challengeQuestion").text(challengeQuestions[2]);
+        editorJS.setReadOnly(false);
+        editorHTML.setReadOnly(true);
+        editorCSS.setReadOnly(true);
+
+        // clear text in editors
+        editorHTML.setValue("");
+        editorCSS.setValue("");
+        editorJS.setValue("");
+
+        // display the html and css for this challenge
+        editorHTML.setValue(HTMLchallenges[2]);
+        editorCSS.setValue(CSSchallenges[2]);
     });
 
     /*********************************************************************************
@@ -80,25 +109,24 @@ $(document).ready(function () {
 
         var preview = document.getElementById('preview').contentWindow.document;
         preview.open();
-        preview.write(
-            "<style>" +
-            editorCSS.getValue() +
-            "</style>" +
-            "<body>" +
-            editorHTML.getValue() +
-            "</body>" +
-            "<script>" +
-            editorJS.getValue() +
-            "</script>"
+        preview.writeln(
+            `<style>
+            ${editorCSS.getValue()}  
+            </style>
+            <script>
+            ${editorJS.getValue()} 
+            </script>
+            ${editorHTML.getValue()}`
         );
         preview.close();
-
     });
 
     $("#clearAnswer").click(function () {
 
         // deletes content in the editor
-        editor.setValue("");
+        editorHTML.setValue("");
+        editorCSS.setValue("");
+        editorJS.setValue("");
 
         // hide alerts
         $('#correctAlert').fadeOut();
@@ -109,39 +137,52 @@ $(document).ready(function () {
 
 // pulls all questions and answers into lists
 function getChallenges() {
-    for (var i = 1; i < 4; i++) {
-        var aFile = 'challenges/js-answers' + i + '.txt';
-        $.get(aFile, function (a) {
-            JSanswers.push(a);
-        });
+    $.get('challenges/HTMLchallenge1-html.txt', function (a) {
+        HTMLchallenges.push(a);
+    });
 
-        var cFile = 'challenges/js-challenge' + i + '.txt';
-        $.get(cFile, function (q) {
-            JSquestions.push(q);
-        });
+    $.get('challenges/CSSchallenge1-html.txt', function (a) {
+        HTMLchallenges.push(a);
+    });
 
-        aFile = 'challenges/css-answers' + i + '.txt';
-        $.get(aFile, function (a) {
-            CSSanswers.push(a);
-        });
+    $.get('challenges/JSchallenge1-html.txt', function (a) {
+        HTMLchallenges.push(a);
+    });
 
-        cFile = 'challenges/css-challenge' + i + '.txt';
-        $.get(cFile, function (q) {
-            CSSquestions.push(q);
-        });
+    $.get('challenges/HTMLchallenge1-css.txt', function (a) {
+        CSSchallenges.push(a);
+    });
 
-        aFile = 'challenges/html-answers' + i + '.txt';
-        $.get(aFile, function (a) {
-            HTMLanswers.push(a);
-        });
+    $.get('challenges/CSSchallenge1-css.txt', function (a) {
+        CSSchallenges.push(a);
+    });
 
-        cFile = 'challenges/html-challenge' + i + '.txt';
-        $.get(cFile, function (q) {
-            HTMLquestions.push(q);
-        });
-    }
-    console.log('answers, questions');
-    console.log(JSanswers, JSquestions);
-    console.log(HTMLanswers, HTMLquestions);
-    console.log(CSSanswers, CSSquestions);
+    $.get('challenges/JSchallenge1-css.txt', function (a) {
+        CSSchallenges.push(a);
+    });
+
+    $.get('challenges/HTMLchallenge1-js.txt', function (a) {
+        JSchallenges.push(a);
+    });
+
+    $.get('challenges/CSSchallenge1-js.txt', function (a) {
+        JSchallenges.push(a);
+    });
+
+    $.get('challenges/JSchallenge1-js.txt', function (a) {
+        JSchallenges.push(a);
+    });
+
+    $.get('challenges/HTMLchallenge1-question.txt', function (a) {
+        challengeQuestions.push(a);
+    });
+
+    $.get('challenges/CSSchallenge1-question.txt', function (a) {
+        challengeQuestions.push(a);
+    });
+
+    $.get('challenges/JSchallenge1-question.txt', function (a) {
+        challengeQuestions.push(a);
+    });
+
 }
