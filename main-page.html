@@ -51,23 +51,25 @@
 
         <!-- challenge title/question.. whatever u want to call it -->
         <div style="margin-top:15px; margin-bottom:20px; margin-left:10px;">
-            <h5 id="challengeQuestion"> Select a Topic. </h5>
+            <h5 id="challengeQuestion"></h5>
         </div>
 
         <!-- Alert that will show on incorrect answer -->
-        <div id="incorrectAlert" class="alert alert-danger" role="alert">
+        <div id="incorrectAlert" class="alert alert-danger" role="alert" style="width:40%;">
             Sorry, answer is not correct.
         </div>
 
         <!-- Alert that will show on correct answer -->
-        <div id="correctAlert" class="alert alert-success" role="alert">
+        <div id="correctAlert" class="alert alert-success" role="alert" style="width:40%;">
             <strong>Correct!</strong>
         </div>
 
-        <!-- user input textbox -->
-        <div>
-            <div id="editor" style="height: 400px; border: 1px solid gray;"></div>
-            <div style="margin-top:8px;">
+        <!-- user input and buttons -->
+        <div style="width:100%;">
+            <div id="editor" style="height:400px; width:45%; border:1px solid gray; float:left"></div>
+            <iframe class="preview" id="preview" style="float:right; width:45%; height:400px">
+            </iframe>
+            <div style="margin-top:8px; width:45%;">
                 <button type="button" id="checkAnswer" style="margin:8px" class="btn btn-info">Check</button>
                 <button type="button" id="nextChallenge" style="float:right; margin:8px" class="btn btn-primary">Next</button>
                 <button type="button" id="clearAnswer" style="float:right; margin:8px" class="btn btn-danger">Clear</button>

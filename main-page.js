@@ -6,8 +6,21 @@ $('#incorrectAlert').hide();
 // Once DOM loads
 $(document).ready(function () {
 
-    // sets up editor after DOM loads
+    // sets up editor and enables preview
     var editor = ace.edit("editor");
+    editor.session.setMode("ace/mode/html");
+    editor.getSession().on('change', function () {
+        $('#preview').contents().find('body').html(editor.getSession().getValue());
+    });
+
+    // enables smooth scrolling to element
+    $('a[href*="#"]').on('click', function (e) {
+        e.preventDefault();
+
+        $('html, body').animate({
+            scrollTop: $($(this).attr('href')).offset().top
+        }, 500, 'linear');
+    });
 
     $("#HTMLTab").click(function () {
 
@@ -16,7 +29,6 @@ $(document).ready(function () {
         $('#correctAlert').hide();
 
         // set editor mode and clear contents
-        editor.session.setMode("ace/mode/html");
         editor.setValue("");
 
         // get question and display it
@@ -33,7 +45,6 @@ $(document).ready(function () {
         $('#correctAlert').hide();
 
         // set editor mode and clear contents
-        editor.session.setMode("ace/mode/css");
         editor.setValue("");
 
         // get question and display it
@@ -50,7 +61,6 @@ $(document).ready(function () {
         $('#correctAlert').hide();
 
         // set editor mode and clear contents
-        editor.session.setMode("ace/mode/javascript");
         editor.setValue("");
 
         // get question and display it
@@ -77,7 +87,9 @@ $(document).ready(function () {
                 // read the entire file into a variable 
                 // use another variable to get the text up to the *
                 // when next is pressed, the next challenge is pulled 
-                // im not sure, this is tricky
+                // im not sure, this is tricky...
+                // or we can just create a drop down menu on each of the tabs
+                // and each question could load in from its own file ?
 
             } else {
 
@@ -105,8 +117,8 @@ $(document).ready(function () {
         editor.setValue("");
 
         // hide alerts
-        $('#correctAlert').fadeOut();
-        $('#incorrectAlert').fadeOut();
+        $('#correctAlert').hide();
+        $('#incorrectAlert').hide();
 
         /* 
             - get the next challenge from text file and display to #challengeQuestion
