@@ -38,8 +38,8 @@ $(document).ready(function () {
      * *********************************************************************************/
 
     $("#HTMLC1").click(function () {
-      
-        hideAlerts(); 
+
+        hideAlerts();
         clearEditors();
 
         // set read only for appropriate editors
@@ -51,7 +51,6 @@ $(document).ready(function () {
         // display the html and css for this challenge
         editorCSS.setValue(HTMLchallenges[0]);
         editorJS.setValue(HTMLchallenges[1]);
-
 
     });
 
@@ -65,11 +64,10 @@ $(document).ready(function () {
 
         // display the question and supporting html and javascript for this challenge
         $("#challengeQuestion").text(challengeQuestions[1]);
-       
+
         // display the html and JS for this challenge
         editorHTML.setValue(CSSchallenges[0]);
         editorJS.setValue(CSSchallenges[1]);
-
 
     });
 
@@ -77,7 +75,7 @@ $(document).ready(function () {
 
         hideAlerts();
         clearEditors();
-        
+
         // set read only for appropriate editors
         setEditorsToReadOnly(true, true, false);
 
@@ -117,7 +115,7 @@ $(document).ready(function () {
     });
 });
 
-function clearPreview(){
+function clearPreview() {
     var preview = document.getElementById('preview').contentWindow.document;
     preview.open();
     preview.writeln(``);
@@ -125,16 +123,16 @@ function clearPreview(){
 }
 
 // Depending on the question, set the editors that do not require user input to read only
-function setEditorsToReadOnly(html, css, js){
+function setEditorsToReadOnly(html, css, js) {
     editorHTML.setReadOnly(html);
     editorCSS.setReadOnly(css);
     editorJS.setReadOnly(js);
 }
 
-function clearEditors(){
+function clearEditors() {
     let currentEditor = getCurrentEditor();
-    
-    switch(currentEditor){
+
+    switch (currentEditor) {
         case "editorHTML":
             editorHTML.setValue("");
             clearPreview();
@@ -213,24 +211,25 @@ function getJSchallenges() {
 
 // Using the ID(id attribute) of the question selected by the user, populate the 
 // 'current-question' attribute on the appropriate editor.
-function setQuestion(questionID){
+function setQuestion(questionID) {
     setEditorFromQuestionID(questionID);
     let currentEditor = getCurrentEditor();
+    console.log(currentEditor);
     document.getElementById(currentEditor).setAttribute('current-question', questionID);
 }
 
 // Make the editor-container aware of which editor the user is currently working in.
-function setEditorFromQuestionID(questionID){
+function setEditorFromQuestionID(questionID) {
     let editor = "";
 
-    switch(questionID){
+    switch (questionID) {
         case "HTMLC1":
             editor = "editorHTML";
             break;
-        case "HTMLC1":
+        case "CSSC1":
             editor = "editorCSS";
             break;
-        case "HTMLC1":  
+        case "JSC1":
             editor = "editorJS";
             break;
         default:
@@ -240,25 +239,25 @@ function setEditorFromQuestionID(questionID){
 }
 
 // Return the current editor
-function getCurrentEditor(){
-    return document.getElementById("editor-container").getAttribute('current-editor')
+function getCurrentEditor() {
+    return document.getElementById("editor-container").getAttribute('current-editor');
 }
 
 // Return the current question
-function getCurrentQuestion(currentEditor){
+function getCurrentQuestion(currentEditor) {
     return document.getElementById(currentEditor).getAttribute('current-question');
 }
 
 // Return the user's answer, with all whitespace removed
-function getUserAnswer(){
+function getUserAnswer() {
     let currentEditor = getCurrentEditor();
 
-    switch(currentEditor){
-        case "editorHTML":  
+    switch (currentEditor) {
+        case "editorHTML":
             return editorHTML.getValue().replace(/\s/g, '');
-        case "editorCSS":  
+        case "editorCSS":
             return editorCSS.getValue().replace(/\s/g, '');
-        case "editorJS":  
+        case "editorJS":
             return editorJS.getValue().replace(/\s/g, '');
         default:
             break;
@@ -266,12 +265,12 @@ function getUserAnswer(){
 }
 
 // Check the user's answer with the pre-generated answer(s)
-function checkAnswer(){
+function checkAnswer() {
     let currentEditor = getCurrentEditor();
     let currentQuestion = getCurrentQuestion(currentEditor);
     let correctAnswer = getCorrectAnswer(currentQuestion);
     let userAnswer = getUserAnswer();
-     if (userAnswer === correctAnswer) {
+    if (userAnswer === correctAnswer) {
         $('#correctAlert').fadeIn();
         $('#incorrectAlert').hide();
     } else {
@@ -281,15 +280,15 @@ function checkAnswer(){
 }
 
 // Return the correct answer(s) for the current question
-function getCorrectAnswer(questionID){
-    let answerIndex = parseInt(questionID.charAt(questionID.length-1) - 1);
+function getCorrectAnswer(questionID) {
+    let answerIndex = parseInt(questionID.charAt(questionID.length - 1) - 1);
 
-    switch(questionID){
+    switch (questionID) {
         case "HTMLC1":
             return HTMLanswers[answerIndex].replace(/\s/g, '');
-        case "HTMLC1":
+        case "CSSC1":
             return CSSanswers[answerIndex].replace(/\s/g, '');
-        case "HTMLC1":  
+        case "JSC1":
             return JSanswers[answerIndex].replace(/\s/g, '');
         default:
             break;
