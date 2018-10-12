@@ -1,1 +1,1 @@
-Create a link that directs to google.com. Call it Google. The link should also open in a new context.
+Using an anchor element, create a link that directs to https://www.google.com. Call it Google. The link should also open in a new context.
