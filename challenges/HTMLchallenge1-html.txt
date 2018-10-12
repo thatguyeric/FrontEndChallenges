@@ -1,1 +1,1 @@
-this is answer for html challenge
+Create a link that directs to google.com. Call it Google. The link should also open in a new context.

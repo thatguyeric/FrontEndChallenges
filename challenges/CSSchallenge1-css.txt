@@ -1,1 +1,7 @@
-this is the answer to css challenge
+div {
+    height: 100px;
+    background-color: red;
+}
+h1 {
+    color: blue;
+}

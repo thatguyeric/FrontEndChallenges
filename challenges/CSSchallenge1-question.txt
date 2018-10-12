@@ -1,1 +1,1 @@
-CSS CHALLENGE 1
+Make the div element 100 px tall and the background color red. Also make the color of the heading blue.
