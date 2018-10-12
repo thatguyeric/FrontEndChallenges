@@ -1,1 +1,1 @@
-<a href="https://www.google.com" target="_blank">Google</a>
+Create a link that directs to google.com. Call it Google. The link should also open in a new context.
