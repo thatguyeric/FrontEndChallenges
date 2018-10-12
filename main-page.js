@@ -28,6 +28,7 @@ getJSchallenges();
 getCSSchallenges();
 getAnswers();
 hideAlerts();
+clearAllEditors();
 
 // Once DOM loads
 $(document).ready(function () {
@@ -37,59 +38,54 @@ $(document).ready(function () {
      * *********************************************************************************/
 
     $("#HTMLC1").click(function () {
+      
+        hideAlerts(); 
+        clearEditors();
 
-        hideAlerts();
+        // set read only for appropriate editors
+        setEditorsToReadOnly(false, true, true);
 
-        //display question and set read only for appropriate editors
+        // display the question and supporting css and javascript for this challenge
         $("#challengeQuestion").text(challengeQuestions[0]);
-        editorHTML.setReadOnly(false);
-        editorCSS.setReadOnly(true);
-        editorJS.setReadOnly(true);
-
-        // clear text in editors
-        clearAllEditors();
 
         // display the html and css for this challenge
         editorCSS.setValue(HTMLchallenges[0]);
         editorJS.setValue(HTMLchallenges[1]);
+
 
     });
 
     $("#CSSC1").click(function () {
 
         hideAlerts();
+        clearEditors();
 
-        //display question and set read only for appropriate editors
+        // set read only for appropriate editors
+        setEditorsToReadOnly(true, false, true);
+
+        // display the question and supporting html and javascript for this challenge
         $("#challengeQuestion").text(challengeQuestions[1]);
-        editorCSS.setReadOnly(false);
-        editorHTML.setReadOnly(true);
-        editorJS.setReadOnly(true);
-
-        // clear text in editors
-        clearAllEditors();
-
+       
         // display the html and JS for this challenge
         editorHTML.setValue(CSSchallenges[0]);
         editorJS.setValue(CSSchallenges[1]);
+
 
     });
 
     $("#JSC1").click(function () {
 
         hideAlerts();
-
-        //display question and set read only for appropriate editors
-        $("#challengeQuestion").text(challengeQuestions[2]);
-        editorJS.setReadOnly(false);
-        editorHTML.setReadOnly(true);
-        editorCSS.setReadOnly(true);
-
-        // clear text in editors
-        clearAllEditors();
+        clearEditors();
+        
+        // set read only for appropriate editors
+        setEditorsToReadOnly(true, true, false);
 
         // display the html and css for this challenge
+        $("#challengeQuestion").text(challengeQuestions[2]);
         editorHTML.setValue(JSchallenges[0]);
         editorCSS.setValue(JSchallenges[1]);
+
     });
 
     /*********************************************************************************
@@ -115,15 +111,47 @@ $(document).ready(function () {
     });
 
     $("#clearAnswer").click(function () {
-
-        // hide alerts
-        $('#correctAlert').fadeOut();
-        $('#incorrectAlert').fadeOut();
+        clearEditors();
+        hideAlerts();
+        clearPreview();
     });
-
 });
 
-// pulls all questions and answers into lists
+function clearPreview(){
+    var preview = document.getElementById('preview').contentWindow.document;
+    preview.open();
+    preview.writeln(``);
+    preview.close();
+}
+
+// Depending on the question, set the editors that do not require user input to read only
+function setEditorsToReadOnly(html, css, js){
+    editorHTML.setReadOnly(html);
+    editorCSS.setReadOnly(css);
+    editorJS.setReadOnly(js);
+}
+
+function clearEditors(){
+    let currentEditor = getCurrentEditor();
+    
+    switch(currentEditor){
+        case "editorHTML":
+            editorHTML.setValue("");
+            clearPreview();
+            break;
+        case "editorCSS":
+            editorCSS.setValue("");
+            clearPreview();
+            break;
+        case "editorJS":
+            editorJS.setValue("");
+            clearPreview();
+            break;
+        default:
+            break;
+    }
+}
+
 function getAnswers() {
     $.get('challenges/HTMLchallenge1-html.txt', function (a) {
         HTMLanswers.push(a);
@@ -183,51 +211,67 @@ function getJSchallenges() {
     });
 }
 
-function setQuestion(questionID) {
+// Using the ID(id attribute) of the question selected by the user, populate the 
+// 'current-question' attribute on the appropriate editor.
+function setQuestion(questionID){
     setEditorFromQuestionID(questionID);
     let currentEditor = getCurrentEditor();
     document.getElementById(currentEditor).setAttribute('current-question', questionID);
 }
 
-function setEditorFromQuestionID(questionID) {
+// Make the editor-container aware of which editor the user is currently working in.
+function setEditorFromQuestionID(questionID){
     let editor = "";
 
-    if (questionID == "HTMLC1")
-        editor = "editorHTML";
-    else if (questionID == "CSSC1")
-        editor = "editorCSS";
-    else if (questionID = "JSC1")
-        editor = "editorJS";
-
+    switch(questionID){
+        case "HTMLC1":
+            editor = "editorHTML";
+            break;
+        case "HTMLC1":
+            editor = "editorCSS";
+            break;
+        case "HTMLC1":  
+            editor = "editorJS";
+            break;
+        default:
+            break;
+    }
     document.getElementById("editor-container").setAttribute('current-editor', editor);
 }
 
-function getCurrentEditor() {
+// Return the current editor
+function getCurrentEditor(){
     return document.getElementById("editor-container").getAttribute('current-editor')
 }
 
-function getCurrentQuestion(currentEditor) {
+// Return the current question
+function getCurrentQuestion(currentEditor){
     return document.getElementById(currentEditor).getAttribute('current-question');
 }
 
-function getUserAnswer() {
+// Return the user's answer, with all whitespace removed
+function getUserAnswer(){
     let currentEditor = getCurrentEditor();
-    if (currentEditor == 'editorHTML')
-        return editorHTML.getValue().replace(/\s/g, '');
-    else if (currentEditor == 'editorCSS')
-        return editorCSS.getValue().replace(/\s/g, '');
-    else if (currentEditor == 'editorJS')
-        return editorJS.getValue().replace(/\s/g, '');
-    return document.getElementById(currentEditor).innerText;
+
+    switch(currentEditor){
+        case "editorHTML":  
+            return editorHTML.getValue().replace(/\s/g, '');
+        case "editorCSS":  
+            return editorCSS.getValue().replace(/\s/g, '');
+        case "editorJS":  
+            return editorJS.getValue().replace(/\s/g, '');
+        default:
+            break;
+    }
 }
 
-function checkAnswer() {
+// Check the user's answer with the pre-generated answer(s)
+function checkAnswer(){
     let currentEditor = getCurrentEditor();
     let currentQuestion = getCurrentQuestion(currentEditor);
     let correctAnswer = getCorrectAnswer(currentQuestion);
     let userAnswer = getUserAnswer();
-
-    if (userAnswer === correctAnswer) {
+     if (userAnswer === correctAnswer) {
         $('#correctAlert').fadeIn();
         $('#incorrectAlert').hide();
     } else {
@@ -236,14 +280,19 @@ function checkAnswer() {
     }
 }
 
-function getCorrectAnswer(question) {
-    let answerIndex = parseInt(question.charAt(question.length - 1) - 1);
-    if (question == "HTMLC1") {
-        return HTMLanswers[answerIndex].replace(/\s/g, '');
-    } else if (question == "CSSC1") {
-        return CSSanswers[answerIndex].replace(/\s/g, '');
-    } else if (question == "JSC1") {
-        return JSanswers[answerIndex].replace(/\s/g, '');
+// Return the correct answer(s) for the current question
+function getCorrectAnswer(questionID){
+    let answerIndex = parseInt(questionID.charAt(questionID.length-1) - 1);
+
+    switch(questionID){
+        case "HTMLC1":
+            return HTMLanswers[answerIndex].replace(/\s/g, '');
+        case "HTMLC1":
+            return CSSanswers[answerIndex].replace(/\s/g, '');
+        case "HTMLC1":  
+            return JSanswers[answerIndex].replace(/\s/g, '');
+        default:
+            break;
     }
 }
 
