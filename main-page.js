@@ -1,40 +1,34 @@
 var answer;
 var question;
 
-// the first one in each is for HTML challenge 1
-// the second one in each is for CSS challenge 1
-// the third one in each is for JS challenge 1
 var JSchallenges = [];
 var CSSchallenges = [];
 var HTMLchallenges = [];
 var challengeQuestions = [];
-
-// holds the set of answers for the challenges
 var HTMLanswers = [];
 var CSSanswers = [];
 var JSanswers = [];
 
-// var HTMLanswers = [];
-// var CSSanswers = [];
-// var JSanswers = [];
-
-getChallenges();
-getAnswers();
-
-// hide alerts before DOM loads
-$('#correctAlert').hide();
-$('#incorrectAlert').hide();
-
-// sets up editor and enables preview
 var editorHTML = ace.edit("editorHTML");
 editorHTML.session.setMode("ace/mode/html");
+
 var editorCSS = ace.edit("editorCSS");
 editorCSS.session.setMode("ace/mode/css");
+
 var editorJS = ace.edit("editorJS");
 editorJS.session.setMode("ace/mode/javascript");
+
 editorHTML.setReadOnly(true);
 editorCSS.setReadOnly(true);
 editorJS.setReadOnly(true);
+
+getChallengeQuestions();
+getHTMLchallenges();
+getJSchallenges();
+getCSSchallenges();
+getAnswers();
+hideAlerts();
+clearAllEditors();
 
 // Once DOM loads
 $(document).ready(function () {
@@ -44,9 +38,6 @@ $(document).ready(function () {
      * *********************************************************************************/
 
     $("#HTMLC1").click(function () {
-        // hide alerts
-        $('#incorrectAlert').hide();
-        $('#correctAlert').hide();
       
         hideAlerts(); 
         clearEditors();
@@ -54,11 +45,13 @@ $(document).ready(function () {
         // set read only for appropriate editors
         setEditorsToReadOnly(false, true, true);
 
-
         // display the question and supporting css and javascript for this challenge
         $("#challengeQuestion").text(challengeQuestions[0]);
-        editorJS.setValue(JSchallenges[0]);
-        editorCSS.setValue(CSSchallenges[0]);
+
+        // display the html and css for this challenge
+        editorCSS.setValue(HTMLchallenges[0]);
+        editorJS.setValue(HTMLchallenges[1]);
+
 
     });
 
@@ -72,8 +65,11 @@ $(document).ready(function () {
 
         // display the question and supporting html and javascript for this challenge
         $("#challengeQuestion").text(challengeQuestions[1]);
-        editorJS.setValue(JSchallenges[1]);
-        editorHTML.setValue(HTMLchallenges[1]);
+       
+        // display the html and JS for this challenge
+        editorHTML.setValue(CSSchallenges[0]);
+        editorJS.setValue(CSSchallenges[1]);
+
 
     });
 
@@ -87,8 +83,9 @@ $(document).ready(function () {
 
         // display the html and css for this challenge
         $("#challengeQuestion").text(challengeQuestions[2]);
-        editorHTML.setValue(HTMLchallenges[2]);
-        editorCSS.setValue(CSSchallenges[2]);
+        editorHTML.setValue(JSchallenges[0]);
+        editorCSS.setValue(JSchallenges[1]);
+
     });
 
     /*********************************************************************************
@@ -118,7 +115,6 @@ $(document).ready(function () {
         hideAlerts();
         clearPreview();
     });
-
 });
 
 function clearPreview(){
@@ -133,11 +129,6 @@ function setEditorsToReadOnly(html, css, js){
     editorHTML.setReadOnly(html);
     editorCSS.setReadOnly(css);
     editorJS.setReadOnly(js);
-}
-
-function hideAlerts(){
-    $('#correctAlert').fadeOut();
-    $('#incorrectAlert').fadeOut(); 
 }
 
 function clearEditors(){
@@ -161,45 +152,22 @@ function clearEditors(){
     }
 }
 
-// pulls all questions and answers into lists
-function getChallenges() {
-
+function getAnswers() {
     $.get('challenges/HTMLchallenge1-html.txt', function (a) {
-        HTMLchallenges.push(a);
-    });
-
-    $.get('challenges/CSSchallenge1-html.txt', function (a) {
-        HTMLchallenges.push(a);
-    });
-
-    $.get('challenges/JSchallenge1-html.txt', function (a) {
-        HTMLchallenges.push(a);
-    });
-
-    $.get('challenges/HTMLchallenge1-css.txt', function (a) {
-        CSSchallenges.push(a);
-    });
-
-    $.get('challenges/CSSchallenge1-css.txt', function (a) {
-        CSSchallenges.push(a);
-    });
-
-    $.get('challenges/JSchallenge1-css.txt', function (a) {
-        CSSchallenges.push(a);
-    });
-
-    $.get('challenges/HTMLchallenge1-js.txt', function (a) {
-        JSchallenges.push(a);
-    });
-
-    $.get('challenges/CSSchallenge1-js.txt', function (a) {
-        JSchallenges.push(a);
+        HTMLanswers.push(a);
     });
 
     $.get('challenges/JSchallenge1-js.txt', function (a) {
-        JSchallenges.push(a);
+        JSanswers.push(a);
     });
 
+    $.get('challenges/CSSchallenge1-css.txt', function (a) {
+        CSSanswers.push(a);
+    });
+
+}
+
+function getChallengeQuestions() {
     $.get('challenges/HTMLchallenge1-question.txt', function (a) {
         challengeQuestions.push(a);
     });
@@ -213,17 +181,33 @@ function getChallenges() {
     });
 }
 
-function getAnswers(){
-    $.get('answers/HTMLanswers.txt', function (a) {
-        HTMLanswers.push(a);
+function getCSSchallenges() {
+    $.get('challenges/CSSchallenge1-html.txt', function (a) {
+        CSSchallenges.push(a);
     });
 
-    $.get('answers/CSSanswers.txt', function (a) {
-        HTMLanswers.push(a);
+    $.get('challenges/CSSchallenge1-js.txt', function (a) {
+        CSSchallenges.push(a);
+    });
+}
+
+function getHTMLchallenges() {
+    $.get('challenges/HTMLchallenge1-css.txt', function (a) {
+        HTMLchallenges.push(a);
     });
 
-    $.get('answers/JSanswers.txt', function (a) {
-        HTMLanswers.push(a);
+    $.get('challenges/HTMLchallenge1-js.txt', function (a) {
+        HTMLchallenges.push(a);
+    });
+}
+
+function getJSchallenges() {
+    $.get('challenges/JSchallenge1-html.txt', function (a) {
+        JSchallenges.push(a);
+    });
+
+    $.get('challenges/JSchallenge1-css.txt', function (a) {
+        JSchallenges.push(a);
     });
 }
 
@@ -287,13 +271,12 @@ function checkAnswer(){
     let currentQuestion = getCurrentQuestion(currentEditor);
     let correctAnswer = getCorrectAnswer(currentQuestion);
     let userAnswer = getUserAnswer();
-
-    if(userAnswer === correctAnswer){
-        //alert("Correct!");
-        $('#correctAlert').show(); 
-    }else{
-        //alert("Sorry, you're answer is incorrect.");
-        $('#incorrectAlert').show();
+     if (userAnswer === correctAnswer) {
+        $('#correctAlert').fadeIn();
+        $('#incorrectAlert').hide();
+    } else {
+        $('#correctAlert').hide();
+        $('#incorrectAlert').fadeIn();
     }
 }
 
@@ -311,4 +294,15 @@ function getCorrectAnswer(questionID){
         default:
             break;
     }
+}
+
+function clearAllEditors() {
+    editorHTML.setValue("");
+    editorCSS.setValue("");
+    editorJS.setValue("");
+}
+
+function hideAlerts() {
+    $('#incorrectAlert').hide();
+    $('#correctAlert').hide();
 }

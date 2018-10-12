@@ -1,1 +1,1 @@
-this is answer for js challenge
+alert("Hello, world!");

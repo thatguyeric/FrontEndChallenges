@@ -1,1 +1,1 @@
-CSS CHALLENGE 1
+Make the div element 100 px tall, the background color red, and also make the color of the text blue.

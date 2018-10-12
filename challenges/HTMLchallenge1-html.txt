@@ -1,1 +1,1 @@
-this is answer for html challenge
+<a href="https://www.google.com" target="_blank">Google</a>
