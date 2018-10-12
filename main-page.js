@@ -8,9 +8,10 @@ var JSchallenges = [];
 var CSSchallenges = [];
 var HTMLchallenges = [];
 var challengeQuestions = [];
-var HTMLanswers = [];
-var CSSanswers = [];
-var JSanswers = [];
+
+// var HTMLanswers = [];
+// var CSSanswers = [];
+// var JSanswers = [];
 
 getChallenges();
 getAnswers();
@@ -38,7 +39,7 @@ $(document).ready(function () {
      * *********************************************************************************/
 
     $("#HTMLC1").click(function () {
-        
+      
         // hide alerts
         $('#incorrectAlert').hide();
         $('#correctAlert').hide();
@@ -110,7 +111,9 @@ $(document).ready(function () {
      * *********************************************************************************/
 
     $("#checkAnswer").click(function () {
+
         checkAnswer();
+
         var preview = document.getElementById('preview').contentWindow.document;
         preview.open();
         preview.writeln(
