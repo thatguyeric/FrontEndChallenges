@@ -9,7 +9,12 @@ var CSSchallenges = [];
 var HTMLchallenges = [];
 var challengeQuestions = [];
 
+// var HTMLanswers = [];
+// var CSSanswers = [];
+// var JSanswers = [];
+
 getChallenges();
+getAnswers();
 
 // hide alerts before DOM loads
 $('#correctAlert').hide();
@@ -34,7 +39,7 @@ $(document).ready(function () {
      * *********************************************************************************/
 
     $("#HTMLC1").click(function () {
-
+      
         // hide alerts
         $('#incorrectAlert').hide();
         $('#correctAlert').hide();
@@ -106,6 +111,8 @@ $(document).ready(function () {
      * *********************************************************************************/
 
     $("#checkAnswer").click(function () {
+
+        checkAnswer();
 
         var preview = document.getElementById('preview').contentWindow.document;
         preview.open();
@@ -184,4 +191,77 @@ function getChallenges() {
     $.get('challenges/JSchallenge1-question.txt', function (a) {
         challengeQuestions.push(a);
     });
+}
+
+function getAnswers(){
+    $.get('answers/HTMLanswers.txt', function (a) {
+        HTMLanswers.push(a);
+    });
+
+    $.get('answers/CSSanswers.txt', function (a) {
+        HTMLanswers.push(a);
+    });
+
+    $.get('answers/JSanswers.txt', function (a) {
+        HTMLanswers.push(a);
+    });
+}
+
+function setQuestion(questionID){
+    setEditorFromQuestionID(questionID);
+    let currentEditor = getCurrentEditor();
+    document.getElementById(currentEditor).setAttribute('current-question', questionID);
+}
+
+function setEditorFromQuestionID(questionID){
+    let editor = "";
+
+    if (questionID == "HTMLC1")
+        editor = "editorHTML";
+    else if (questionID == "CSSC1")
+        editor = "editorCSS";
+    else if (questionID = "JSC1")
+        editor = "editorJS";
+
+    document.getElementById("editor-container").setAttribute('current-editor', editor);
+}
+
+function getCurrentEditor(){
+    return document.getElementById("editor-container").getAttribute('current-editor')
+}
+
+function getCurrentQuestion(currentEditor){
+    return document.getElementById(currentEditor).getAttribute('current-question');
+}
+
+function getUserAnswer(){
+    let currentEditor = getCurrentEditor();
+    if(currentEditor == 'editorHTML')
+        return editorHTML.getValue().replace(/\s/g, '');
+    else if(currentEditor == 'editorCSS')
+        return editorCSS.getValue().replace(/\s/g, '');
+    else if(currentEditor == 'editorJS')
+        return editorJS.getValue().replace(/\s/g, '');
+    return document.getElementById(currentEditor).innerText;
+}
+
+function checkAnswer(){
+    let currentEditor = getCurrentEditor();
+    let currentQuestion = getCurrentQuestion(currentEditor);
+    let correctAnswer = getCorrectAnswer(currentQuestion);
+    let userAnswer = getUserAnswer();
+
+    if(userAnswer === correctAnswer)
+        alert('you gucci');
+}
+
+function getCorrectAnswer(question){
+    let answerIndex = parseInt(question.charAt(question.length-1) - 1);
+    if(question == "HTMLC1"){
+        return HTMLanswers[answerIndex].replace(/\s/g, '');
+    } else if(question == "CSSC1") {
+        return CSSanswers[answerIndex].replace(/\s/g, '');
+    } else if(question == "JSC1"){
+        return JSanswers[answerIndex].replace(/\s/g, '');
+    }
 }

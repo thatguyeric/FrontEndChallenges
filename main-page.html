@@ -41,7 +41,7 @@
                         HTML
                     </a>
                     <div class="dropdown-menu" aria-labelledby="HTMLTab">
-                        <a class="dropdown-item" id="HTMLC1" href="#currentChallenge">HTML Challenge 1</a>
+                        <button class="dropdown-item" id="HTMLC1" href="#currentChallenge" onclick="setQuestion(this.id)">HTML Challenge 1</button>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -50,7 +50,7 @@
                         CSS
                     </a>
                     <div class="dropdown-menu" aria-labelledby="CSSTab">
-                        <a class="dropdown-item" id="CSSC1" href="#currentChallenge">CSS Challenge 1</a>
+                        <button class="dropdown-item" id="CSSC1" href="#currentChallenge" onclick="setQuestion(this.id)">CSS Challenge 1</button>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -59,7 +59,7 @@
                         JavaScript
                     </a>
                     <div class="dropdown-menu" aria-labelledby="JSTab">
-                        <a class="dropdown-item" id="JSC1" href="#currentChallenge">JavaScript Challenge 1</a>
+                        <button class="dropdown-item" id="JSC1" href="#currentChallenge" onclick="setQuestion(this.id)">JavaScript Challenge 1</button>
                     </div>
                 </li>
             </ul>
@@ -80,18 +80,18 @@
         <div style="width:100%; ">
 
             <!-- editors -->
-            <div style="display:flex; justify-content:center;">
+            <div id="editor-container" current-question="" style="display:flex; justify-content:center;" current-editor="">
                 <div style="width:25%">
                     <h6>HTML</h6>
-                    <div id="editorHTML" style="height:200px; width:95%;  border:1px solid gray;"></div>
+                    <div id="editorHTML" current-question="" style="height:200px; width:95%;  border:1px solid gray;"></div>
                 </div>
                 <div style="width:25%">
                     <h6>CSS</h6>
-                    <div id="editorCSS" style="height:200px; width:95%; border:1px solid gray;"></div>
+                    <div id="editorCSS" current-question="" style="height:200px; width:95%; border:1px solid gray;"></div>
                 </div>
                 <div style="width:25%">
                     <h6>JavaScript</h6>
-                    <div id="editorJS" style="height:200px; width:95%;  border:1px solid gray;"></div>
+                    <div id="editorJS" current-question="" style="height:200px; width:95%;  border:1px solid gray;"></div>
                 </div>
             </div>
 
