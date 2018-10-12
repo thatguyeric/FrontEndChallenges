@@ -8,14 +8,15 @@ var JSchallenges = [];
 var CSSchallenges = [];
 var HTMLchallenges = [];
 var challengeQuestions = [];
-<<<<<<< Updated upstream
-=======
 
 // holds the set of answers for the challenges
->>>>>>> Stashed changes
 var HTMLanswers = [];
 var CSSanswers = [];
 var JSanswers = [];
+
+// var HTMLanswers = [];
+// var CSSanswers = [];
+// var JSanswers = [];
 
 getChallenges();
 getAnswers();
@@ -43,16 +44,12 @@ $(document).ready(function () {
      * *********************************************************************************/
 
     $("#HTMLC1").click(function () {
-<<<<<<< Updated upstream
-        
         // hide alerts
         $('#incorrectAlert').hide();
         $('#correctAlert').hide();
-=======
       
         hideAlerts(); 
         clearEditors();
->>>>>>> Stashed changes
 
         // set read only for appropriate editors
         setEditorsToReadOnly(false, true, true);
@@ -99,7 +96,9 @@ $(document).ready(function () {
      * *********************************************************************************/
 
     $("#checkAnswer").click(function () {
+
         checkAnswer();
+
         var preview = document.getElementById('preview').contentWindow.document;
         preview.open();
         preview.writeln(

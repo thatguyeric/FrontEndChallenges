@@ -1,0 +1,15 @@
+.btn {
+    width: 75px;
+}
+
+#userInput {
+    background-color: rgba(254, 250, 250, 0.5);
+}
+
+.jumbotron {
+    background: linear-gradient(#d7f1f5, #c8d6e7, #4ec4d6);
+}
+
+.nav-item {
+    margin-right: 5px;
+}
