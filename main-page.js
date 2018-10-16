@@ -49,8 +49,8 @@ $(document).ready(function () {
         $("#challengeQuestion").text(challengeQuestions[0]);
 
         // display the html and css for this challenge
-        editorCSS.setValue(HTMLchallenges[0]);
-        editorJS.setValue(HTMLchallenges[1]);
+        editorCSS.setValue(HTMLchallenges[0], 1);
+        editorJS.setValue(HTMLchallenges[1], 1);
 
     });
 
@@ -66,8 +66,8 @@ $(document).ready(function () {
         $("#challengeQuestion").text(challengeQuestions[1]);
 
         // display the html and JS for this challenge
-        editorHTML.setValue(CSSchallenges[0]);
-        editorJS.setValue(CSSchallenges[1]);
+        editorHTML.setValue(CSSchallenges[0], 1);
+        editorJS.setValue(CSSchallenges[1], 1);
 
     });
 
@@ -81,8 +81,8 @@ $(document).ready(function () {
 
         // display the html and css for this challenge
         $("#challengeQuestion").text(challengeQuestions[2]);
-        editorHTML.setValue(JSchallenges[0]);
-        editorCSS.setValue(JSchallenges[1]);
+        editorHTML.setValue(JSchallenges[0], 1);
+        editorCSS.setValue(JSchallenges[1], 1);
 
     });
 

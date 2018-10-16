@@ -27,7 +27,7 @@
 <body>
 
     <!-- responsive nav bar at the top of the screen -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color:white;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:white;">
         <img src="./html-css-javascript.png" height="45" class="d-inline-block align-top" style="margin-right:20px;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +75,7 @@
     <div id="currentChallenge" style="margin-top:3%">
 
         <!-- challenge title/question.. whatever u want to call it -->
-        <div style="display:flex; justify-content:center; margin-top:15px; margin-bottom:30px; margin-left:10px;">
+        <div style="display:flex; justify-content:center; margin-top:15px; margin-bottom:30px; margin-left:15%; margin-right:15%">
             <h5 id="challengeQuestion"></h5>
         </div>
 
@@ -102,8 +102,8 @@
                 <div style="margin-top:10px; width:45%;">
 
                     <!-- buttons -->
-                    <button type="button" id="checkAnswer" style="margin:8px" class="btn btn-info">Check</button>
-                    <button type="button" id="clearAnswer" style="float:right; margin:8px" class="btn btn-danger">Clear</button>
+                    <button type="button" id="checkAnswer" style="margin:8px;" class="btn btn-info">Check</button>
+                    <button type="button" id="clearAnswer" style="float:right; margin:8px;" class="btn btn-danger">Clear</button>
 
                     <div style="margin-top:10px">
                         <!-- Alert that will show on incorrect answer -->
@@ -118,7 +118,7 @@
                     </div>
 
                     <!-- preview of user answer -->
-                    <iframe id="preview" style="width:100%; margin-top:10px; display:flex; justify-content:center; height:400px; border: 1px solid gray">
+                    <iframe id="preview" style="width:100%; margin-top:10px; display:flex; justify-content:center; height:300px; border: 1px solid gray">
                     </iframe>
 
                 </div>
